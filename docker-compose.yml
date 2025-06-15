@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  web:
+    image: mal_ai:latest
+    build: .
+    container_name: mal_ai_container
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    command: gunicorn --bind 0.0.0.0:5000 wsgi:app
+    volumes:
+      - ./uploads:/app/uploads
+      - ./analyzed:/app/analyzed
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5000 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
