@@ -377,7 +377,8 @@ def mal_upload_file():
             # Prepare the enhanced response with malaria-specific diagnosis
             response = {
                 'rotated_image': analyzed_image_url, # for android
-
+                'time_taken': time_taken, #for android
+                'original_image': f"{base_url}/{original_path}", #for android
                 'success': True,
                 'processing_info': {
                     'time_taken': time_taken,
